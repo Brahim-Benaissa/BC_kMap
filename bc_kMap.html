@@ -169,8 +169,8 @@
       <div class="btns">
         <button data-c="1">1 · baryons only</button>
         <button data-c="200">200</button>
-        <button data-c="377" class="on">377 · paper</button>
-        <button data-c="450">450 · extreme</button>
+        <button data-c="377" class="on">377 · Universal</button>
+        <button data-c="450">450</button>
         <label class="chk"><input type="checkbox" id="lbChk" checked> labels</label>
         <label class="chk"><input type="checkbox" id="smChk" checked> smoothing</label>
       </div>
@@ -206,7 +206,7 @@ const MGAL=6.0e10, AGAL=3;        // uniform galaxy mass / Plummer radius
 const C_PAPER=377, ETA_TARGET=4.5;// calibration anchor (eta at C = 377)
 
 /* ---- C response mapping (fits the simulation's behavior) -------------------------- */
-const C_SLMAX=450, C_WEB_MAX=800;
+const C_SLMAX=450, C_WEB_MAX=1000;
 const K_EXP=Math.log(C_WEB_MAX/C_PAPER)/(C_SLMAX-C_PAPER);
 const cEff=C=> C<=C_PAPER ? C : C_PAPER*Math.exp(K_EXP*(C-C_PAPER));
 /* ==================================================================================== */
