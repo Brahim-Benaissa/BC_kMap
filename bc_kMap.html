@@ -3,7 +3,49 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-<title>Bullet Cluster — Missing-Area (Mezzi) Lensing</title>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-104TPV326N"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-104TPV326N');
+</script>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-TRGMTJZG');</script>
+<!-- End Google Tag Manager -->
+
+<title>Bullet Cluster Lensing Without Dark Matter, Mezzi Missing-Area Simulation</title>
+
+<!-- ==================== SEO ==================== -->
+<meta name="description" content="Bullet Cluster lensing in the Mezzi framework, 223 baryonic components, vacuum compliance C = 377 (η ≈ 4.5), strong-lensing κ ≥ 1 contours without dark matter." />
+<meta name="keywords" content="bullet cluster, 1E 0657-56, gravitational lensing, convergence map, strong lensing, Mezzi effect, missing area, missing mass, dark matter alternative, vacuum compliance constant, C = 377, area Jacobian, mass correction eta, baryonic mass model, Famaey 2026, Benaissa 2026, galaxy cluster, kappa map, interactive astrophysics simulation" />
+<meta name="author" content="Galaxy Rotation Curve Project" />
+<meta name="theme-color" content="#0b0d12" />
+
+<!-- Set when the page has its final URL:
+<link rel="canonical" href="https://YOUR-DOMAIN/bullet-cluster-mezzi-lensing.html" />
+-->
+
+<!-- ==================== Open Graph (social previews) ==================== -->
+<meta property="og:title" content="Bullet Cluster Lensing Without Dark Matter, Mezzi Missing-Area Simulation" />
+<meta property="og:description" content="A 223-component baryonic model of the Bullet Cluster with the Mezzi geometric correction: drag the vacuum compliance C and watch the strong-lensing κ ≥ 1 contours emerge on the galaxies, no dark matter added." />
+<meta property="og:type" content="website" />
+<!-- Add a 1200×630 thumbnail when available:
+<meta property="og:image" content="https://YOUR-DOMAIN/img/bullet-cluster-mezzi.png" />
+-->
+
+<!-- ==================== Twitter Card ==================== -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Bullet Cluster Lensing Without Dark Matter, Mezzi Simulation" />
+<meta name="twitter:description" content="Interactive convergence map: baryons + the Mezzi missing-area correction (C = 377, η ≈ 4.5) reproduce the Bullet Cluster's strong lensing without dark matter." />
+<!-- <meta name="twitter:image" content="https://YOUR-DOMAIN/img/bullet-cluster-mezzi.png" /> -->
+
 <style>
   :root {
     --bg: #0b0d12; --panel: #12151d; --panel2: #0e1017;
@@ -55,12 +97,25 @@
   @media (min-width: 768px) { .ctrl { max-width: 640px; flex: 1; } }
   .sliderRow { display: flex; align-items: center; gap: 12px; }
   input[type=range] { flex: 1; accent-color: var(--ember); height: 20px; min-width: 100px; }
-  output { font: 700 14px ui-monospace, Consolas, monospace; color: var(--ember); min-width: 70px; text-align: right; }
   .btns { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
   button { background: #1a1f2b; color: var(--tx); border: 1px solid #2c3346; border-radius: 6px; padding: 4px 8px; font-size: 11px; cursor: pointer; }
   button:hover { background: #232a3a; }
   button.on { background: var(--ember); color: #14100a; border-color: var(--ember); font-weight: 700; }
   .chk { font-size: 11px; color: var(--tx2); display: flex; gap: 6px; align-items: center; }
+
+  /* --- Share button (top right, replaces the C readout at the end of the slider) --- */
+  #shareButton {
+    flex-shrink: 0;
+    background: #1a1f2b; color: var(--tx);
+    border: 1px solid #2c3346; border-radius: 6px;
+    padding: 5px 14px; font-size: 11px; font-weight: 600; letter-spacing: .07em;
+    cursor: pointer; font-family: inherit;
+    transition: color .2s, border-color .2s, background .2s;
+  }
+  #shareButton:hover {
+    color: var(--cyan); border-color: rgba(140,240,255,.45);
+    background: rgba(140,240,255,.07);
+  }
 
   /* --- Main Layout --- */
   main {
@@ -146,15 +201,30 @@
     text-align: center;
     padding: 20px;
   }
+
+  /* --- Toast (share confirmation) --- */
+  #toast {
+    visibility: hidden; min-width: 220px; margin-left: -110px;
+    background: #15182a; border: 1px solid #2c3346; color: var(--tx);
+    text-align: center; border-radius: 8px; padding: 10px 16px;
+    position: fixed; z-index: 999; left: 50%; bottom: 30px;
+    font-size: 13px; opacity: 0;
+    transition: opacity .5s ease, transform .5s ease;
+  }
 </style>
 </head>
 <body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TRGMTJZG"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
 <div id="loading">Building 223-component mass model · calibrating kernel to η = 4.5 @ C = 377 …</div>
 
 <div id="app">
   <header>
     <div>
-      <h1>Bullet Cluster — Missing-Area (Mezzi) Lensing</h1>
+      <h1>Bullet Cluster, Missing-Area (Mezzi) Lensing</h1>
       <p class="sub">Full Paper:
         <a href="https://www.preprints.org/manuscript/202608.2229" target="_blank" rel="noopener">On the Missing Area of the Bullet Cluster</a>
         &nbsp;·&nbsp; Baryonic model: Famaey 2026 (arXiv:2605.10022) · z<sub>lens</sub> = 0.296 ·
@@ -164,10 +234,10 @@
       <div class="sliderRow">
         <span style="font-size:13px;white-space:nowrap">Compliance&nbsp;<b>C</b></span>
         <input type="range" id="cSlider" min="1" max="450" step="1" value="377" aria-label="Mezzi compliance constant">
-        <output id="cOut">C = 377</output>
+        <button id="shareButton" type="button" aria-label="Copy page link" title="Copy page link">Share</button>
       </div>
       <div class="btns">
-        <button data-c="1">0 · No mezzi Effect</button>
+        <button data-c="1">0 · No Mezzi Effect</button>
         <button data-c="200">200</button>
         <button data-c="377" class="on">377 · Universal Compliance</button>
         <button data-c="450">450</button>
@@ -186,12 +256,14 @@
       <div class="canvas-container">
         <div class="canvas-wrapper">
           <canvas id="cvB" class="map" width="512" height="512"></canvas>
-          <p class="ill"> ILLUSTRATION </p>
+          <p class="ill">⚠ This is an illustration.</p>
         </div>
       </div>
     </section>
   </main>
 </div>
+
+<div id="toast"></div>
 
 <script>
 "use strict";
@@ -464,7 +536,6 @@ function update(C){
   down2(KT,KT5); KT5s.set(KT5); blurG(KT5s,N5,SIGPX);
   etaV=etaFromJ();
   renderB();
-  $("cOut").textContent="C = "+C;
   $("kbC").textContent="C = "+C;
   $("etaC").textContent="η = "+etaV.toFixed(2);
 }
@@ -512,6 +583,39 @@ document.querySelectorAll("button[data-c]").forEach(b=>b.addEventListener("click
  $("lbChk").addEventListener("change",e=>{labelsOn=e.target.checked;renderB();});
 requestAnimationFrame(()=>setTimeout(()=>{try{init();}catch(err){
   $("loading").textContent="Error: "+err.message;console.error(err);}},30));
+</script>
+
+<script>
+/* ============================================================
+   SHARE BUTTON + TOAST (same behavior as the companion pages)
+   ============================================================ */
+(function(){
+'use strict';
+var btn=document.getElementById('shareButton');
+var toast=document.getElementById('toast');
+var tT=null;
+function showToast(msg){
+  toast.textContent=msg;
+  toast.style.visibility='visible';
+  toast.style.opacity='1';
+  toast.style.transform='translateY(0)';
+  clearTimeout(tT);
+  tT=setTimeout(function(){
+    toast.style.opacity='0';
+    toast.style.transform='translateY(20px)';
+    setTimeout(function(){toast.style.visibility='hidden';},500);
+  },3000);
+}
+btn.addEventListener('click',function(){
+  if(navigator.clipboard&&navigator.clipboard.writeText){
+    navigator.clipboard.writeText(window.location.href)
+      .then(function(){showToast('Link copied to clipboard!');})
+      .catch(function(){showToast('Failed to copy the link.');});
+  }else{
+    showToast('Failed to copy the link.');
+  }
+});
+})();
 </script>
 </body>
 </html>
